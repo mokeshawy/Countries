@@ -38,15 +38,15 @@ class MainFragment : Fragment() {
             binding.swipeRefreshLayout.isRefreshing = false
             mainViewModel.refresh()
         }
-
         // call fun observe.
         observeViewModel()
     }
 
     // fun observe data.
     private fun observeViewModel() {
-        // update data.
+        // Show data from api.
         mainViewModel.countries.observe(viewLifecycleOwner, Observer { countries ->
+            binding.rvCountryList.visibility = View.VISIBLE
             countryListAdapter.updateCountry(countries)
         })
 

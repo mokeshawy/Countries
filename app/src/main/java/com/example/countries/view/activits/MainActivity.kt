@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         navController   = navHostFragment.navController
 
         // Operation work for action bar on fragment page.
-        appBarConfiguration =AppBarConfiguration(setOf())
+        appBarConfiguration =AppBarConfiguration(setOf(R.id.mainFragment))
         setupActionBarWithNavController(navController,appBarConfiguration)
 
         // Work on hide and show action bar on fragment page.

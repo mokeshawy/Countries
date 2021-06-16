@@ -2,17 +2,19 @@ package com.example.countries.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.countries.databinding.CountryListItemBinding
 import com.example.countries.model.CountriesModel
+import com.example.countries.util.getProgressDrawable
+import com.example.countries.util.loadImage
+import com.example.countries.view.mainfragment.MainViewModel
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
+import java.lang.Exception
 
 class CountryListAdapter (private var mCountry: ArrayList<CountriesModel> ) : RecyclerView.Adapter<CountryListAdapter.ViewHolder>() {
 
-    fun updateCountry( newCountry : List<CountriesModel>){
-        mCountry.clear()
-        mCountry.addAll(newCountry)
-        notifyDataSetChanged()
-    }
 
     class ViewHolder(var binding : CountryListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -29,12 +31,19 @@ class CountryListAdapter (private var mCountry: ArrayList<CountriesModel> ) : Re
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-
-        viewHolder.binding.countryName.text = mCountry[position].countryName
+        viewHolder.binding.tvCountryName.text       = mCountry[position].countryName
+        viewHolder.binding.tvCapitalCountry.text    = mCountry[position].capital
+        viewHolder.binding.ivCountryFlag.loadImage(mCountry[position].flag, getProgressDrawable(viewHolder.itemView.context))
 
     }
 
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = mCountry.size
+
+    fun updateCountry( newCountry : List<CountriesModel>){
+        mCountry.clear()
+        mCountry.addAll(newCountry)
+        notifyDataSetChanged()
+    }
 }
