@@ -38,6 +38,8 @@ class MainFragment : Fragment() {
             binding.swipeRefreshLayout.isRefreshing = false
             mainViewModel.refresh()
         }
+
+
         // call fun observe.
         observeViewModel()
     }

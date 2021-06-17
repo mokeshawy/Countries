@@ -2,16 +2,11 @@ package com.example.countries.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.countries.databinding.CountryListItemBinding
 import com.example.countries.model.CountriesModel
 import com.example.countries.util.getProgressDrawable
 import com.example.countries.util.loadImage
-import com.example.countries.view.mainfragment.MainViewModel
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
-import java.lang.Exception
 
 class CountryListAdapter (private var mCountry: ArrayList<CountriesModel> ) : RecyclerView.Adapter<CountryListAdapter.ViewHolder>() {
 

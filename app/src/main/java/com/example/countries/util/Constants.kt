@@ -15,7 +15,7 @@ const val BASE_URL = "https://raw.githubusercontent.com/"
 fun getProgressDrawable( context : Context) : CircularProgressDrawable{
     return CircularProgressDrawable(context).apply {
         strokeWidth =10f
-        centerRadius =50f
+        centerRadius =40f
         start()
     }
 }

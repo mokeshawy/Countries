@@ -1,18 +1,19 @@
 package com.example.countries.repository
 
+import com.example.countries.debendencyinjection.DaggerApiComponent
 import com.example.countries.model.CountriesModel
 import com.example.countries.retrofit.ConnectionEndPoint
-import com.example.countries.util.BASE_URL
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 class CountryRepository {
 
-    var api : ConnectionEndPoint = Retrofit.Builder().baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-        .create(ConnectionEndPoint::class.java)
+    @Inject
+   lateinit var api : ConnectionEndPoint
+
+   init{
+       DaggerApiComponent.create().inject(this)
+   }
 
     // fun getCountry repo.
    suspend fun getCountry() : Response<List<CountriesModel>>{
