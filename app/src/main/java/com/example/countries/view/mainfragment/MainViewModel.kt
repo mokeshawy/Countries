@@ -34,7 +34,8 @@ class MainViewModel : ViewModel() {
         // show progress bar.
         loading.value = true
         CoroutineScope(Dispatchers.IO).launch{
-            var response = countryRepository.getCountry()
+
+            val response = countryRepository.getCountry()
             CoroutineScope(Dispatchers.Main).launch {
                 if(response.isSuccessful){
                     countries.value = response.body()!!

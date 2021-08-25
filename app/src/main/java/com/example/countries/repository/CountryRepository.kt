@@ -19,6 +19,4 @@ class CountryRepository {
    suspend fun getCountry() : Response<List<CountriesModel>>{
        return api.getCountries()
    }
-
-
 }
