@@ -8,6 +8,7 @@ import com.example.countries.repository.CountryRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 class MainViewModel : ViewModel() {
@@ -35,22 +36,26 @@ class MainViewModel : ViewModel() {
         loading.value = true
         CoroutineScope(Dispatchers.IO).launch{
 
-            val response = countryRepository.getCountry()
-            CoroutineScope(Dispatchers.Main).launch {
-                if(response.isSuccessful){
-                    countries.value = response.body()!!
+            try {
+                val response = countryRepository.getCountry()
+                CoroutineScope(Dispatchers.Main).launch {
+                    if(response.isSuccessful){
+                        countries.value = response.body()!!
 
-                    // hide text error.
-                    countryLoadError.value = false
-                    // hide progress bar.
-                    loading.value = false
-                }else{
-                    // show text error.
-                    countryLoadError.value = true
-                    // hide progress bar.
-                    loading.value = false
+                        // hide text error.
+                        countryLoadError.value = false
+                        // hide progress bar.
+                        loading.value = false
+                    }else{
+                        // show text error.
+                        countryLoadError.value = true
+                        // hide progress bar.
+                        loading.value = false
+                    }
                 }
+            }catch (e:Exception){
             }
+
         }
     }
 }

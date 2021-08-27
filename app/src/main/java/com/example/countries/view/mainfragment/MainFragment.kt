@@ -32,22 +32,30 @@ class MainFragment : Fragment() {
         binding.lifecycleOwner  = this
         binding.mainFragment    = mainViewModel
 
-        // operation check connect with network.
-        val connectManager  = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo     = connectManager.allNetworkInfo
 
+
+        binding.rvCountryList.adapter = countryListAdapter
         // swipe refresh.
         binding.swipeRefreshLayout.setOnRefreshListener {
             binding.swipeRefreshLayout.isRefreshing = false
             mainViewModel.refresh()
+            activity?.recreate()
         }
 
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // operation check connect with network.
+        val connectManager  = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo     = connectManager.allNetworkInfo
         for( networkInfo in networkInfo){
             if(networkInfo.typeName.equals("WIFI",ignoreCase = true)){
                 if(networkInfo.isConnected){
                     // call fun refresh.
                     mainViewModel.refresh()
-                    binding.rvCountryList.adapter = countryListAdapter
 
                     Toast.makeText(requireActivity(),"Connected with Wifi",Toast.LENGTH_SHORT).show()
                     // call fun observe.
@@ -61,7 +69,6 @@ class MainFragment : Fragment() {
             }
         }
     }
-
     // fun observe data.
     private fun observeViewModel() {
         // Show data from api.
